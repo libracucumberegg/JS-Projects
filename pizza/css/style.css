@@ -1,0 +1,63 @@
+body {
+    background-color: red;
+}
+
+h1, h3 {
+    font-family: math;
+    color: green;
+}
+
+div {
+    font-family: math;
+    color: blue;
+}
+
+#menuBG {
+    width: 400px;
+    height: 470px;
+    margin: 10px auto;
+}
+
+#menu {
+    width: 400px;
+    height: 200px;
+}
+
+#totalPrice {
+    width: 200px;
+    height: 190px;
+    margin: 0px auto;
+    float: right;
+}
+
+.left {
+    width: 200px;
+    height: 345px;
+    float: left;
+}
+
+.right {
+    width: 200px;
+    height: 345px;
+    float: right;
+}
+
+#showText {
+    width: 200px;
+    height: 190px;
+    margin: 0px auto;
+    float: left;
+}
+
+#cart {
+    top: 0;
+    margin: 0px auto;
+    width: 400px;
+    height: 200px;
+}
+
+#order {
+    margin: 10px 0px 0px 250px;
+    width: 100px;
+    height: 40px;
+}
