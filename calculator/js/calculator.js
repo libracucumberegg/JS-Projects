@@ -5,26 +5,34 @@ let operators = [];
 
 function addOperator(operator) {
     if (operators.length === 0 && tempNumber === 0) return;
+    if (tempNumber.toString().endsWith('.')) {
+        tempNumber = tempNumber.substring(0, tempNumber.length - 1); // get rid of the decimal point if nothing is after it
+    }
     numbers.push(parseFloat(tempNumber));
     tempNumber = 0.0;
     if (operator === '=') {
         evaluate();
         return;
     }
-    tempOperator = operator; // save operator to be pushed later in case the user inputted the wrong one
+    tempOperator = operator; // save operator to be pushed later in case the user inputted the wrong one and wants to change it
 }
 
 function evaluate() {
     let result = parseFloat(numbers[0]);
     for (let i = 0; i < numbers.length - 1; i++) { // - 1 because first number is already set
-        if (operators[i] === '+') {
-            result += parseFloat(numbers[i + 1]);
-        } else if (operators[i] === '-') {
-            result -= parseFloat(numbers[i + 1]);
-        } else if (operators[i] === '×') {
-            result *= parseFloat(numbers[i + 1]);
-        } else if (operators[i] === '÷') {
-            result /= parseFloat(numbers[i + 1]);
+        switch (operators[i]) {
+            case '+':
+                result += parseFloat(numbers[i + 1]);
+                break;
+            case '-':
+                result -= parseFloat(numbers[i + 1]);
+                break;
+            case '*':
+                result *= parseFloat(numbers[i + 1]);
+                break;
+            case '/':
+                result /= parseFloat(numbers[i + 1]);
+                break;
         }
     }
 
@@ -69,7 +77,7 @@ window.addEventListener("DOMContentLoaded", (event) => { // wait for DOM to load
         if (!target.matches('button')) return;
 
         if (target.classList.contains('operator')) {
-            addOperator(target.textContent);
+            addOperator(target.value); // consistency for evaluate()
             update();
             return;
         }
@@ -114,7 +122,10 @@ window.addEventListener("DOMContentLoaded", (event) => { // wait for DOM to load
 
         if (keyName === 'Backspace' || keyName === 'Delete') {
             if (tempNumber === 0 || tempNumber === null) return;
-            tempNumber = tempNumber.substring(0, tempNumber.length - 1);
+            tempNumber = tempNumber.toString().substring(0, tempNumber.length - 1);
+            if (tempNumber.length === 0) {
+                tempNumber = 0;
+            }
             update();
             return;
         }
@@ -131,8 +142,7 @@ window.addEventListener("DOMContentLoaded", (event) => { // wait for DOM to load
         }
 
         if (keyName === '+' || keyName === '-' || keyName === '*' || keyName === '/') {
-            let fixedOp = keyName === '*' ? '×' : keyName === '/' ? '÷' : keyName; // change to make it work with evaluate()
-            addOperator(fixedOp);
+            addOperator(keyName);
             update();
             return;
         }
