@@ -2,7 +2,7 @@
 
 Completed projects utilizing Javascript:
 
-TicTacToe
-Pizza ordering website
-Calculator
+TicTacToe\
+Pizza ordering website\
+Calculator\
 Portfolio
